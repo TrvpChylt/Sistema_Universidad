@@ -1,52 +1,123 @@
-/* Mejora en el Contenedor Principal */
+/* Estilos generales para el Header */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+}
+
+header {
+    background-color: #1a2a3a;
+    color: white;
+    padding: 15px 0;
+    width: 100%;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.contenedor-header {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 0 20px;
+}
+
+.titulo-uni p {
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.contenedor-header ul {
+    list-style: none;
+    display: flex;
+    gap: 15px; 
+}
+
+.contenedor-header ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 10px 18px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.contenedor-header ul li a:hover {
+    background-color: #3498db;
+}
+
+/* Sección Principal (Hero) */
 .contenedor-principal {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between; 
     align-items: center;
-    gap: 60px; /* Más espacio entre texto e imagen */
+    gap: 50px;
     max-width: 1200px;
-    margin: 80px auto; /* Más respiro arriba y abajo */
+    margin: 60px auto;
     padding: 0 20px;
 }
 
 .contendor-texto {
     flex: 1;
-    padding: 0; /* Limpiamos el padding para alinear mejor */
 }
 
-/* Título con más fuerza (Añádelo en tu HTML) */
 .contendor-texto h1 {
-    font-size: 2.8rem;
+    font-size: 2.5rem;
     color: #1a2a3a;
     margin-bottom: 20px;
-    line-height: 1.1;
 }
 
 .texto-principal {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     line-height: 1.8;
-    color: #555; /* Un gris un poco más suave es más elegante */
-    font-style: normal; /* La cursiva cansa en textos largos */
+    color: #444;
 }
 
 .contenedor-img {
-    flex: 1.2; /* Un poco más grande pero no el doble */
+    flex: 1;
+    display: flex;
+    justify-content: center;
 }
 
-/* Botones en el Header: Estilo tipo "Pill" */
-.contenedor-header ul li a {
-    padding: 10px 20px;
-    border-radius: 50px; /* Bordes redondeados modernos */
-    font-weight: 600;
+.img-principal {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
-/* Efecto para el botón de Inscripción (si quieres que resalte) */
-.contenedor-header ul li:last-child a {
-    background-color: #3498db;
-    color: white;
+/* Botón especial Salir */
+.btn-salir {
+    background-color: #e74c3c !important;
 }
 
-.contenedor-header ul li:last-child a:hover {
-    background-color: #2980b9;
+/* Sección de Cartas */
+.seccion-cartas {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 60px 20px;
+    background-color: #f8f9fa;
+}
+
+.carta {
+    flex: 1;
+    min-width: 280px;
+    max-width: 350px;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+
+.carta:hover {
+    transform: translateY(-10px);
 }
