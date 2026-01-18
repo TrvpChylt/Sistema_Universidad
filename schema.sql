@@ -7,10 +7,10 @@ CREATE TABLE IF NOT EXISTS alumnos (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nombre TEXT NOT NULL,
     apellido TEXT NOT NULL,
-    cedula TEXT NOT NULL,
-    correo TEXT NOT NULL,
+    cedula TEXT UNIQUE NOT NULL,
+    correo TEXT UNIQUE NOT NULL,
     clave TEXT NOT NULL,
-    id_carrera INTEGER,
+    id_carrera INTEGER, 
     FOREIGN KEY (id_carrera) REFERENCES carreras_universitarias (id)
 );
 

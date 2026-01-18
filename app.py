@@ -47,9 +47,9 @@ def formulario_registro():
 @app.route('/obtener_materias/<int:id_carrera>')
 def obtener_materias(id_carrera):
     conn = get_db_connection()
-    materias = conn.execute("SELECT id, nombre_materia FROM materias WHERE id_carrera = ?", (id_carrera,)).fetchall()
+    # Cambiamos "id_carrera" por "carrera_id" que es como lo pusiste en el script de la DB
+    materias = conn.execute("SELECT id, nombre_materia FROM materias WHERE carrera_id = ?", (id_carrera,)).fetchall()
     conn.close()
-    # Convertimos los resultados de SQLite a una lista de diccionarios para JSON
     return jsonify([dict(ix) for ix in materias])
 
 @app.route('/procesar_registro', methods=['POST'])
