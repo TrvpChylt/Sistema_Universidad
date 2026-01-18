@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Inscripcion.css') }}">
+    <title>Inscripcion de Universidad</title>
+</head>
+<body>
+     <div class="contenedor_registro">
+        <h2>Registro de Alumno</h2>
+        
+        <form action="/procesar_registro" method="POST">
+            <input type="text" name="nombre" placeholder="Nombre" required>
+            <input type="text" name="apellido" placeholder="Apellido" required>
+            <input type="text" name="cedula" placeholder="Cédula" required>
+            <input type="email" name="correo" placeholder="Correo electrónico" required>
+            <input type="password" name="clave" placeholder="Contraseña" required>
+            
+            <label>Carrera:</label>
+                <select id="select-carrera" name="id_carrera" onchange="cargarMaterias(this.value)">
+                    <option value="">Selecciona una carrera</option>
+                    {% for carrera in carreras %}
+                        <option value="{{ carrera.id }}">{{ carrera.nombre_carrera }}</option>
+                    {% endfor %}
+                </select>
+
+                <label>Materia a inscribir:</label>
+                <select id="select-materia" name="id_materia" required>
+                    <option value="">Primero elige una carrera</option>
+                </select>
+
+                <script>
+                function cargarMaterias(idCarrera) {
+                    const selectMateria = document.getElementById('select-materia');
+                    selectMateria.innerHTML = '<option>Cargando...</option>';
+
+                    if (!idCarrera) return;
+
+                    // Llamamos a nuestra ruta de Flask
+                    fetch('/obtener_materias/' + idCarrera)
+                        .then(response => response.json())
+                        .then(data => {
+                            selectMateria.innerHTML = '<option value="">Selecciona una materia</option>';
+                            data.forEach(materia => {
+                                selectMateria.innerHTML += `<option value="${materia.id}">${materia.nombre_materia}</option>`;
+                            });
+                        });
+                }
+                </script>
+            
+            <button type="submit">Finalizar Inscripción</button>
+        </form>
+        <p><a href="{{ url_for('index') }}">Volver al Inicio</a></p>
+      </div>
+</body>
+</html>
