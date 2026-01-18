@@ -47,7 +47,6 @@ def formulario_registro():
 @app.route('/obtener_materias/<int:id_carrera>')
 def obtener_materias(id_carrera):
     conn = get_db_connection()
-    # Cambiamos "id_carrera" por "carrera_id" que es como lo pusiste en el script de la DB
     materias = conn.execute("SELECT id, nombre_materia FROM materias WHERE carrera_id = ?", (id_carrera,)).fetchall()
     conn.close()
     return jsonify([dict(ix) for ix in materias])

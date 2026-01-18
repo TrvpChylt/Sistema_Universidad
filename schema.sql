@@ -1,6 +1,9 @@
-CREATE TABLE IF NOT EXISTS carreras_universitarias (
+DROP TABLE IF EXISTS materias;
+CREATE TABLE materias (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nombre_carrera TEXT NOT NULL
+    nombre_materia TEXT NOT NULL,
+    carrera_id INTEGER, -- Asegúrate que se llame carrera_id
+    FOREIGN KEY (carrera_id) REFERENCES carreras_universitarias (id)
 );
 
 CREATE TABLE IF NOT EXISTS alumnos (
