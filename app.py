@@ -6,26 +6,23 @@ import os
 app = Flask(__name__)
 app.secret_key = 'mi_llave_secreta_universitaria'
 
-# 1. CONFIGURACIÓN DE LA BASE DE DATOS (SQLite)
 def get_db_connection():
-    # Usamos la ruta absoluta de tu cuenta en PythonAnywhere
     database_path = '/home/JesusChylt29/database.db'
     conn = sqlite3.connect(database_path)
-    conn.row_factory = sqlite3.Row  # Permite acceder a columnas por nombre
+    conn.row_factory = sqlite3.Row 
     return conn
 
-# --- RUTAS PRINCIPALES ---
+# --- Rutas ---
 
 @app.route('/')
 def index():
     materia_inscrita = None
     if 'usuario_id' in session:
         conn = get_db_connection()
-        # Buscamos la materia del alumno usando un JOIN
         query = """
-            SELECT m.nombre_materia 
-            FROM materias m
-            JOIN inscripciones i ON m.id = i.id_materia
+            SELECT nombre_materia 
+            FROM materias nombre_materia 
+            JOIN inscripciones i ON nombre_materia.id = i.id_materia
             WHERE i.id_alumno = ?
             LIMIT 1
         """
@@ -34,14 +31,12 @@ def index():
     
     return render_template('index.html', materia=materia_inscrita)
 
-# --- FLUJO DE REGISTRO E INSCRIPCIÓN ---
 
 @app.route('/registro', methods=['GET'])
 def formulario_registro():
     conn = get_db_connection()
     carreras = conn.execute("SELECT * FROM carreras_universitarias").fetchall()
     conn.close()
-    # Cambiado a Inscripcion.html según tu archivo
     return render_template('inscripcion.html', carreras=carreras)
 
 @app.route('/obtener_materias/<int:id_carrera>')
@@ -63,7 +58,6 @@ def registro():
 
     conn = get_db_connection()
     try:
-        # Insertar Alumno
         cursor = conn.cursor()
         cursor.execute("""
             INSERT INTO alumnos (nombre, apellido, cedula, correo, clave, id_carrera) 
@@ -72,14 +66,13 @@ def registro():
         
         id_nuevo_alumno = cursor.lastrowid
         
-        # Insertar Inscripción
         cursor.execute("""
             INSERT INTO inscripciones (id_alumno, id_materia, fecha_inscripcion) 
             VALUES (?, ?, DATE('now'))""", 
             (id_nuevo_alumno, id_materia))
         
         conn.commit()
-        flash("Registro e inscripción exitosos. Ya puedes iniciar sesión.")
+        flash("Tus Datos fueron Inscritos Correctamente. Ya puedes iniciar sesión.")
         return redirect(url_for('login_page'))
     except Exception as e:
         conn.rollback()
@@ -87,7 +80,6 @@ def registro():
     finally:
         conn.close()
 
-# --- FLUJO DE LOGIN ---
 
 @app.route('/login', methods=['GET'])
 def login_page():
