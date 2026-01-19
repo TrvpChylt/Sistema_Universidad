@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS materias;
 CREATE TABLE materias (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nombre_materia TEXT NOT NULL,
-    carrera_id INTEGER, -- Asegúrate que se llame carrera_id
+    carrera_id INTEGER, 
     FOREIGN KEY (carrera_id) REFERENCES carreras_universitarias (id)
 );
 

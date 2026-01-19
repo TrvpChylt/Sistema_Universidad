@@ -30,5 +30,3 @@ cur.executemany("INSERT INTO materias (nombre_materia, carrera_id) VALUES (?, ?)
 
 connection.commit()
 connection.close()
-
-print("Base de datos SQLite lista con carreras y materias vinculadas.")

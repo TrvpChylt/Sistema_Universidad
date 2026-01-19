@@ -37,7 +37,6 @@
 
                     if (!idCarrera) return;
 
-                    // Llamamos a nuestra ruta de Flask
                     fetch('/obtener_materias/' + idCarrera)
                         .then(response => response.json())
                         .then(data => {
