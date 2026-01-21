@@ -46,7 +46,7 @@ input:focus {
 
 label { font-weight: bold; margin-bottom: -10px; color: #555; }
 
-button {
+button, .btn-volver {
     padding: 10px 20px;     
     margin-top: 10px; 
     background-color: #1e1f20;
@@ -59,14 +59,17 @@ button {
     transition: all 0.3s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
     text-align: center;
-    display: block;
+    display: block;        
     text-decoration: none;
+    box-sizing: border-box; 
+    width: 100%;           
 }
 
-button:hover {
+button:hover, .btn-volver:hover {
     background-color: #fc866e; 
     transform: translateY(-2px); 
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    color: white;/
 }
 
 button:active {
