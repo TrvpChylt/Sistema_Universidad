@@ -58,7 +58,7 @@ button:active {
     transform: translateY(0); 
 }
 
-Boton_volver{
+a {
     background-color: #6198cf;
     padding: 10px 20px;   
     color: white; 
@@ -69,12 +69,12 @@ Boton_volver{
     transition: all 0.3s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);     
 }
-Boton_volver:hover {
+a:hover {
     background-color: #6d94bd; 
     transform: translateY(-2px); 
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-Boton_volver:active {
+a:active {
     transform: translateY(0); 
 }
