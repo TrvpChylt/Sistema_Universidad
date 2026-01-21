@@ -58,24 +58,3 @@ button:active {
     transform: translateY(0); 
 }
 
-a {
-    background-color: #1e1f20;
-    padding: 10px 20px;   
-    color: white; 
-    border-radius: 8px;   
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 16px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);   
-    text-decoration: none;  
-}
-a:hover {
-    background-color: #fc866e; 
-    transform: translateY(-2px); 
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-a:active {
-    transform: translateY(0); 
-}
