@@ -13,7 +13,7 @@
             </div>
             <ul>
                 {% if session.get('usuario_id') %}
-                    <li><span style="color: #3498db;">Hola, {{ session['nombre'] }}</span></li>
+                    <li><span style="color: #fff;">Hola, {{ session['nombre'] }}</span></li>
                     <li><a href="{{ url_for('logout') }}">Cerrar Sesión</a></li>
                 {% else %}
                     <li><a href="{{ url_for('login_page') }}">Inicio de Sesión</a></li>
@@ -25,8 +25,9 @@
 
     <div class="contenedor-principal">
         <div class="contendor-texto">
+            <h1>Bienvenidos</h1>
             <p class="texto-principal">
-                "Bienvenidos a la Facultad de Informática, el espacio donde transformamos el código en soluciones para el 
+                "La Facultad de Informática, el espacio donde transformamos el código en soluciones para el 
                 mundo real. Esta plataforma es tu puerta de acceso a la innovación y al crecimiento académico..."
             </p>
         </div>
