@@ -35,12 +35,24 @@ input:focus {
     border-bottom: 2px solid #007BFF;
 }
 button {
-    padding: 6, 10;
-    background-color: #8aaccf;
+    padding: 10px 20px;       
+    background-color: #6198cf;
     color: white;
     border: none;
+    border-radius: 8px;      
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
 }
 
-button:hover { background-color: #00509e; }
+button:hover {
+    background-color: #6d94bd; 
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+button:active {
+    transform: translateY(0); 
+}
