@@ -35,7 +35,7 @@ input:focus {
     border-bottom: 2px solid #007BFF;
 }
 button {
-
+    padding: 6, 10;
     background-color: #8aaccf;
     color: white;
     border: none;
