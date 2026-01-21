@@ -22,7 +22,7 @@ h2 { color: #003366; }
 input {
     width: 100%;
     padding: 12px 0; 
-    margin: 10px 0;
+    margin: 10px;
     border: none;               
     border-bottom: 2px solid #000000;
     border-radius: 0;          
@@ -35,7 +35,8 @@ input:focus {
     border-bottom: 2px solid #007BFF;
 }
 button {
-    padding: 10px 20px;       
+    padding: 10px 20px;     
+    margin-top: 10px; 
     background-color: #6198cf;
     color: white;
     border: none;
@@ -54,5 +55,26 @@ button:hover {
 }
 
 button:active {
+    transform: translateY(0); 
+}
+
+Boton_volver{
+    background-color: #6198cf;
+    padding: 10px 20px;   
+    color: white; 
+    border-radius: 8px;   
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);     
+}
+Boton_volver:hover {
+    background-color: #6d94bd; 
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+Boton_volver:active {
     transform: translateY(0); 
 }
