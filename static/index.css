@@ -96,29 +96,59 @@ header {
     background-color: #e74c3c !important;
 }
 
-/* Sección de Cartas */
-.seccion-cartas {
+/* Contenedor principal */
+.contenedor-materias {
     display: flex;
-    justify-content: center;
+    gap: 20px;
     flex-wrap: wrap;
-    gap: 30px;
-    padding: 60px 20px;
-    background-color: #f8f9fa;
+    padding: 20px;
 }
 
-.carta {
-    flex: 1;
-    min-width: 280px;
-    max-width: 350px;
-    background: #e74c3c;
-    padding: 30px;
-    border-radius: 15px;
+/* Estilo de los botones/tarjetas */
+.materia-card {
+    background-color: #e74c3c; /* Color similar al de tu imagen */
     color: white;
+    width: 250px;
+    padding: 30px 20px;
+    border-radius: 15px;
     text-align: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.2s;
 }
 
-.carta:hover {
-    transform: translateY(-10px);
+.materia-card:hover {
+    transform: translateY(-5px);
+    background-color: #d64535;
+}
+
+.materia-card strong {
+    display: block;
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+.materia-card small {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* El Modal (Popup) */
+.modal {
+    display: none; 
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    width: 300px;
+    text-align: center;
 }
