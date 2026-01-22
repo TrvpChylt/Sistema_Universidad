@@ -99,7 +99,9 @@ header {
 /* Contenedor principal */
 .contenedor-materias {
     display: flex;
-    gap: 20px;
+    justify-content: center;
+    gap: 30px;
+    padding: 60px 20px;
     flex-wrap: wrap;
     padding: 20px;
 }
