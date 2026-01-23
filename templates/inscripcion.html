@@ -25,10 +25,16 @@
                     {% endfor %}
                 </select>
 
-                <label>Materia a inscribir:</label>
-                <select id="select-materia" name="id_materia" required>
-                    <option value="">Primero elige una carrera</option>
-                </select>
+                <label>Selecciona 3 materias:</label>
+                    <select name="materias_ids" required class="select-materia">
+                        <option value="">Selecciona materia 1</option>
+                    </select>
+                    <select name="materias_ids" required class="select-materia">
+                        <option value="">Selecciona materia 2</option>
+                    </select>
+                    <select name="materias_ids" required class="select-materia">
+                        <option value="">Selecciona materia 3</option>
+                    </select>
 
                 <script>
                 function cargarMaterias(idCarrera) {

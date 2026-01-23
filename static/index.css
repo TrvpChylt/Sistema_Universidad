@@ -97,7 +97,7 @@ header {
 }
 
 /* Contenedor principal */
-.contenedor-materias {
+.seccion-cartas {
     display: flex;
     justify-content: center;
     gap: 30px;
@@ -107,7 +107,7 @@ header {
 }
 
 /* Estilo de los botones/tarjetas */
-.materia-card {
+.carta {
     background-color: #e74c3c; /* Color similar al de tu imagen */
     color: white;
     width: 250px;
@@ -119,38 +119,18 @@ header {
     transition: transform 0.2s;
 }
 
-.materia-card:hover {
+.card:hover {
     transform: translateY(-5px);
     background-color: #d64535;
 }
 
-.materia-card strong {
+.card strong {
     display: block;
     font-size: 1.2rem;
     margin-top: 10px;
 }
 
-.materia-card small {
+.card small {
     font-size: 0.9rem;
     opacity: 0.9;
-}
-
-/* El Modal (Popup) */
-.modal {
-    display: none; 
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.6);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.modal-content {
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    width: 300px;
-    text-align: center;
 }
