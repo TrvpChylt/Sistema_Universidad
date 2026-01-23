@@ -79,8 +79,7 @@ def registro():
         # 5. Insertar los datos del alumno
         cursor.execute("""
             INSERT INTO alumnos (nombre, apellido, cedula, correo, clave, id_carrera) 
-            VALUES (?, ?, ?, ?, ?, ?)""", 
-            (nombre, apellido, cedula, correo, password_hash, id_carrera))
+            VALUES (?, ?, ?, ?, ?, ?)""", (nombre, apellido, cedula, correo, password_hash, id_carrera))
         
         id_nuevo_alumno = cursor.lastrowid
         

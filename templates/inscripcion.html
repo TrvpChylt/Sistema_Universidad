@@ -17,29 +17,25 @@
             <input type="email" name="correo" placeholder="Correo electrónico" required>
             <input type="password" name="clave" placeholder="Contraseña" required>
             
-            <label>Carrera:</label>
-                <select id="select-carrera" name="id_carrera" onchange="cargarMaterias(this.value)">
-                    <option value="">Selecciona una carrera</option>
-                    {% for carrera in carreras %}
-                        <option value="{{ carrera.id }}">{{ carrera.nombre_carrera }}</option>
-                    {% endfor %}
+            <label for="id_carrera">Carrera:</label>
+            <select name="id_carrera" id="id_carrera" onchange="cargarMaterias()" required>
+                <option value="">Selecciona una carrera</option>
+                {% for carrera in carreras %}
+                    <option value="{{ carrera.id }}">{{ carrera.nombre_carrera }}</option>
+                {% endfor %}
+            </select>
+
+            <div class="contenedor-materias">
+                <select name="id_materia" class="materia-select" required>
+                    <option value="">Materia 1</option>
                 </select>
-
-                <label>Selecciona tus 3 materias obligatorias:</label>
-
-                <div class="contenedor-materias">
-                    <select name="id_materia" class="select-materia" required>
-                        <option value="">Materia 1</option>
-                    </select>
-                    
-                    <select name="id_materia" class="select-materia" required>
-                        <option value="">Materia 2</option>
-                    </select>
-                    
-                    <select name="id_materia" class="select-materia" required>
-                        <option value="">Materia 3</option>
-                    </select>
-                </div>
+                <select name="id_materia" class="materia-select" required>
+                    <option value="">Materia 2</option>
+                </select>
+                <select name="id_materia" class="materia-select" required>
+                    <option value="">Materia 3</option>
+                </select>
+            </div>
 
                 <script>
                     function cargarMaterias() {
