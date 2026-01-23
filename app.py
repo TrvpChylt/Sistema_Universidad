@@ -16,20 +16,19 @@ def get_db_connection():
 
 @app.route('/')
 def index():
-    materia_inscrita = None
+    materias = []
     if 'usuario_id' in session:
         conn = get_db_connection()
         query = """
-            SELECT nombre_materia 
-            FROM materias nombre_materia 
-            JOIN inscripciones i ON nombre_materia.id = i.id_materia
+            SELECT m.nombre_materia 
+            FROM materias m
+            JOIN inscripciones i ON m.id = i.id_materia
             WHERE i.id_alumno = ?
-            LIMIT 1
         """
-        materia_inscrita = conn.execute(query, (session['usuario_id'],)).fetchone()
+        materias = conn.execute(query, (session['usuario_id'],)).fetchall()
         conn.close()
     
-    return render_template('index.html', materia=materia_inscrita)
+    return render_template('index.html', materias=materias)
 
 
 @app.route('/registro', methods=['GET'])
@@ -46,15 +45,16 @@ def obtener_materias(id_carrera):
     conn.close()
     return jsonify([dict(ix) for ix in materias])
 
+
+
 @app.route('/procesar_registro', methods=['POST'])
 def registro():
-    nombre = request.form['nombre']
-    apellido = request.form['apellido']
-    cedula = request.form['cedula']
-    correo = request.form['correo']
-    password_hash = generate_password_hash(request.form['clave'])
     id_carrera = request.form['id_carrera']
-    id_materia = request.form['id_materia']
+    materias_seleccionadas = request.form.getlist('id_materia')
+
+    if len(materias_seleccionadas) < 3 or len(materias_seleccionadas) > 5:
+        flash("Error: Selecciona entre 3 y 5 materias.")
+        return redirect(url_for('formulario_registro'))
 
     conn = get_db_connection()
     try:
@@ -66,13 +66,14 @@ def registro():
         
         id_nuevo_alumno = cursor.lastrowid
         
-        cursor.execute("""
-            INSERT INTO inscripciones (id_alumno, id_materia, fecha_inscripcion) 
-            VALUES (?, ?, DATE('now'))""", 
-            (id_nuevo_alumno, id_materia))
+        for id_materia in materias_seleccionadas:
+            cursor.execute("""
+                INSERT INTO inscripciones (id_alumno, id_materia, fecha_inscripcion) 
+                VALUES (?, ?, DATE('now'))""", 
+                (id_nuevo_alumno, id_materia))
         
         conn.commit()
-        flash("Tus Datos fueron Inscritos Correctamente. Ya puedes iniciar sesión.")
+        flash("Inscripción exitosa con " + str(len(materias_seleccionadas)) + " materias.")
         return redirect(url_for('login_page'))
     except Exception as e:
         conn.rollback()

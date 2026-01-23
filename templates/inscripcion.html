@@ -25,16 +25,22 @@
                     {% endfor %}
                 </select>
 
-                <label>Selecciona 3 materias:</label>
-                    <select name="materias_ids" required class="select-materia">
-                        <option value="">Selecciona materia 1</option>
-                    </select>
-                    <select name="materias_ids" required class="select-materia">
-                        <option value="">Selecciona materia 2</option>
-                    </select>
-                    <select name="materias_ids" required class="select-materia">
-                        <option value="">Selecciona materia 3</option>
-                    </select>
+                <label for="id_materia">Selecciona tus materias (Mínimo 3, Máximo 5):</label>
+                <select name="id_materia" id="id_materia" multiple required style="height: 150px;">
+                    <option value="">Primero selecciona una carrera</option>
+                </select>
+
+                <script>
+                document.querySelector('form').onsubmit = function(e) {
+                    const select = document.getElementById('id_materia');
+                    const seleccionadas = Array.from(select.selectedOptions).length;
+
+                    if (seleccionadas < 3 || seleccionadas > 5) {
+                        e.preventDefault();
+                        alert("Debes seleccionar entre 3 y 5 materias.");
+                    }
+                };
+                </script>
 
                 <script>
                 function cargarMaterias(idCarrera) {

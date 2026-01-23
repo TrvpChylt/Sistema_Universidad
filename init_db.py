@@ -18,6 +18,8 @@ id_derecho = cur.lastrowid
 
 materias = [
     ('Programación I', id_informatica),
+    ('Ingles', id_informatica),
+    ('Proyecto', id_informatica),
     ('Base de Datos', id_informatica),
     ('Análisis Matemático', id_informatica),
     ('Contabilidad I', id_administracion),

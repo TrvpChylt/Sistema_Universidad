@@ -38,14 +38,18 @@
     </div>
 
     {% if session.get('usuario_id') %}
-        <section class="seccion-cartas">
-            <div class="carta">
-                <div class="icono">📚</div>
-                    <h3>{{ materia.nombre_materia }}</h3>
-                    <p>Estado: Inscrita correctamente</p>
+    <section class="seccion-cartas">
+        <h2>Tus Materias Inscritas</h2>
+        <div class="contenedor-grid">
+            {% for materia in materias %}
+                <div class="carta">
+                    <div class="icono">📚</div>
+                    <h3>{{ materia['nombre_materia'] }}</h3>
+                    <p>Estado: Inscrita</p>
                 </div>
-            </div>
-        </section> 
+            {% endfor %}
+        </div>
+    </section> 
     {% endif %}
 </body>
 </html>
