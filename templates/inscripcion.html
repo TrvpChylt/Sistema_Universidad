@@ -42,27 +42,31 @@
                 </div>
 
                 <script>
-                function cargarMaterias() {
-                    const idCarrera = document.getElementById('id_carrera').value;
-                    const selectsMaterias = document.querySelectorAll('.select-materia');
+                    function cargarMaterias() {
+                        const idCarrera = document.getElementById('id_carrera').value;
+                        // Seleccionamos los tres cuadros a la vez
+                        const todosLosSelects = document.querySelectorAll('.select-materia');
 
-                    if (!idCarrera) {
-                        selectsMaterias.forEach(s => s.innerHTML = '<option value="">Selecciona carrera</option>');
-                        return;
-                    }
+                        if (!idCarrera) {
+                            todosLosSelects.forEach(s => s.innerHTML = '<option value="">Selecciona carrera</option>');
+                            return;
+                        }
 
-                    fetch(`/obtener_materias/${idCarrera}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            selectsMaterias.forEach((select, index) => {
-                                let opciones = `<option value="">Selecciona Materia ${index + 1}</option>`;
-                                data.forEach(materia => {
-                                    opciones += `<option value="${materia.id}">${materia.nombre_materia}</option>`;
+                        // Llamamos a la ruta de Flask que ya tienes creada
+                        fetch(`/obtener_materias/${idCarrera}`)
+                            .then(response => response.json())
+                            .then(data => {
+                                // Limpiamos y llenamos cada uno de los 3 selects
+                                todosLosSelects.forEach((select, index) => {
+                                    let opciones = `<option value="">Seleccionar Materia ${index + 1}</option>`;
+                                    data.forEach(materia => {
+                                        opciones += `<option value="${materia.id}">${materia.nombre_materia}</option>`;
+                                    });
+                                    select.innerHTML = opciones;
                                 });
-                                select.innerHTML = opciones;
-                            });
-                        });
-                }
+                            })
+                            .catch(error => console.error('Error al cargar materias:', error));
+                    }
                 </script>
             
             <button type="submit">Finalizar Inscripción</button> 
