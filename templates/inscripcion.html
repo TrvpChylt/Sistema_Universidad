@@ -25,44 +25,40 @@
                 {% endfor %}
             </select>
 
+            <label>Selecciona tus 3 materias:</label>
             <div class="contenedor-materias">
-                <select name="id_materia" class="materia-select" required>
-                    <option value="">Materia 1</option>
-                </select>
-                <select name="id_materia" class="materia-select" required>
-                    <option value="">Materia 2</option>
-                </select>
-                <select name="id_materia" class="materia-select" required>
-                    <option value="">Materia 3</option>
-                </select>
+                <select name="id_materia" class="materia-select" required><option>Materia 1</option></select>
+                <select name="id_materia" class="materia-select" required><option>Materia 2</option></select>
+                <select name="id_materia" class="materia-select" required><option>Materia 3</option></select>
             </div>
 
                 <script>
                     function cargarMaterias() {
-                        const idCarrera = document.getElementById('id_carrera').value;
-                        // Seleccionamos los tres cuadros a la vez
-                        const todosLosSelects = document.querySelectorAll('.select-materia');
+                    const idCarrera = document.getElementById('id_carrera').value;
+                    const selects = document.querySelectorAll('.materia-select');
 
-                        if (!idCarrera) {
-                            todosLosSelects.forEach(s => s.innerHTML = '<option value="">Selecciona carrera</option>');
-                            return;
-                        }
-
-                        // Llamamos a la ruta de Flask que ya tienes creada
-                        fetch(`/obtener_materias/${idCarrera}`)
-                            .then(response => response.json())
-                            .then(data => {
-                                // Limpiamos y llenamos cada uno de los 3 selects
-                                todosLosSelects.forEach((select, index) => {
-                                    let opciones = `<option value="">Seleccionar Materia ${index + 1}</option>`;
-                                    data.forEach(materia => {
-                                        opciones += `<option value="${materia.id}">${materia.nombre_materia}</option>`;
-                                    });
-                                    select.innerHTML = opciones;
-                                });
-                            })
-                            .catch(error => console.error('Error al cargar materias:', error));
+                    if (!idCarrera) {
+                        selects.forEach(s => s.innerHTML = '<option value="">Selecciona carrera</option>');
+                        return;
                     }
+
+                    // Llamada a la ruta de Flask
+                    fetch('/obtener_materias/' + idCarrera)
+                        .then(response => response.json())
+                        .then(data => {
+                            selects.forEach((select, index) => {
+                                // Limpiar contenido previo
+                                select.innerHTML = ''; 
+                                
+                                let opciones = `<option value="">Seleccionar Materia ${index + 1}</option>`;
+                                data.forEach(materia => {
+                                    opciones += `<option value="${materia.id}">${materia.nombre_materia}</option>`;
+                                });
+                                select.innerHTML = opciones;
+                            });
+                        })
+                        .catch(error => console.error('Error:', error));
+                }
                 </script>
             
             <button type="submit">Finalizar Inscripción</button> 

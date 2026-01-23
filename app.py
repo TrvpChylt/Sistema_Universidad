@@ -7,11 +7,13 @@ app = Flask(__name__)
 app.secret_key = 'mi_llave_secreta_universitaria'
 
 def get_db_connection():
-    database_path = '/home/JesusChylt29/database.db'
+    # Esto busca el archivo en la misma carpeta donde está app.py
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    database_path = os.path.join(base_dir, 'database.db')
+    
     conn = sqlite3.connect(database_path)
     conn.row_factory = sqlite3.Row 
     return conn
-
 # --- Rutas ---
 
 @app.route('/')
@@ -41,7 +43,6 @@ def formulario_registro():
 @app.route('/obtener_materias/<int:id_carrera>')
 def obtener_materias(id_carrera):
     conn = get_db_connection()
-    # Verifica que los nombres de columnas coincidan con tu INSERT
     materias = conn.execute(
         "SELECT id, nombre_materia FROM materias WHERE carrera_id = ?", 
         (id_carrera,)
@@ -82,8 +83,8 @@ def registro():
         
         # 5. Insertar los datos del alumno
         cursor.execute("""
-            INSERT INTO alumnos (nombre, apellido, cedula, correo, clave, id_carrera) 
-            VALUES (?, ?, ?, ?, ?, ?)""", (nombre, apellido, cedula, correo, password_hash, id_carrera))
+        INSERT INTO alumnos (nombre, apellido, cedula, correo, clave, id_carrera) 
+        VALUES (?, ?, ?, ?, ?, ?) """, (nombre, apellido, cedula, correo, password_hash, id_carrera))
         
         id_nuevo_alumno = cursor.lastrowid
         
