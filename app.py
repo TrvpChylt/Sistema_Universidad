@@ -41,7 +41,11 @@ def formulario_registro():
 @app.route('/obtener_materias/<int:id_carrera>')
 def obtener_materias(id_carrera):
     conn = get_db_connection()
-    materias = conn.execute("SELECT id, nombre_materia FROM materias WHERE carrera_id = ?", (id_carrera,)).fetchall()
+    # Verifica que los nombres de columnas coincidan con tu INSERT
+    materias = conn.execute(
+        "SELECT id, nombre_materia FROM materias WHERE carrera_id = ?", 
+        (id_carrera,)
+    ).fetchall()
     conn.close()
     return jsonify([dict(ix) for ix in materias])
 
