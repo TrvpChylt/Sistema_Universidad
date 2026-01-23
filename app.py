@@ -49,35 +49,30 @@ def obtener_materias(id_carrera):
 
 @app.route('/procesar_registro', methods=['POST'])
 def registro():
-    id_carrera = request.form['id_carrera']
+    # ... otros datos (nombre, cedula, etc)
+    
+    # Esto obtiene los IDs de los 3 selects: ['1', '5', '8']
     materias_seleccionadas = request.form.getlist('id_materia')
-
-    if len(materias_seleccionadas) < 3 or len(materias_seleccionadas) > 5:
-        flash("Error: Selecciona entre 3 y 5 materias.")
-        return redirect(url_for('formulario_registro'))
 
     conn = get_db_connection()
     try:
         cursor = conn.cursor()
-        cursor.execute("""
-            INSERT INTO alumnos (nombre, apellido, cedula, correo, clave, id_carrera) 
-            VALUES (?, ?, ?, ?, ?, ?)""", 
-            (nombre, apellido, cedula, correo, password_hash, id_carrera))
-        
+        # Insertar Alumno
+        cursor.execute("INSERT INTO alumnos ...", (...))
         id_nuevo_alumno = cursor.lastrowid
         
+        # Insertar las 3 inscripciones recorriendo la lista
         for id_materia in materias_seleccionadas:
-            cursor.execute("""
-                INSERT INTO inscripciones (id_alumno, id_materia, fecha_inscripcion) 
-                VALUES (?, ?, DATE('now'))""", 
-                (id_nuevo_alumno, id_materia))
+            if id_materia: # Validar que no esté vacío
+                cursor.execute("""
+                    INSERT INTO inscripciones (id_alumno, id_materia, fecha_inscripcion) 
+                    VALUES (?, ?, DATE('now'))""", (id_nuevo_alumno, id_materia))
         
         conn.commit()
-        flash("Inscripción exitosa con " + str(len(materias_seleccionadas)) + " materias.")
         return redirect(url_for('login_page'))
     except Exception as e:
         conn.rollback()
-        return f"Error: {str(e)}"
+        return f"Error: {e}"
     finally:
         conn.close()
 
