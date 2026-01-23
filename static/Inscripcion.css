@@ -75,3 +75,18 @@ button:hover, .btn-volver:hover {
 button:active {
     transform: translateY(0); 
 }
+
+.contenedor-materias {
+    display: flex;
+    flex-direction: column; /* Uno debajo del otro */
+    gap: 15px;             /* Espacio entre ellos */
+    margin-top: 10px;
+}
+
+.select-materia {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: white;
+}

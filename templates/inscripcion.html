@@ -25,36 +25,41 @@
                     {% endfor %}
                 </select>
 
-                <label for="id_materia">Selecciona tus materias (Mínimo 3, Máximo 5):</label>
-                <select name="id_materia" id="id_materia" multiple required style="height: 150px;">
-                    <option value="">Primero selecciona una carrera</option>
-                </select>
+                <label>Selecciona tus 3 materias obligatorias:</label>
+
+                <div class="contenedor-materias">
+                    <select name="id_materia" class="select-materia" required>
+                        <option value="">Materia 1</option>
+                    </select>
+                    
+                    <select name="id_materia" class="select-materia" required>
+                        <option value="">Materia 2</option>
+                    </select>
+                    
+                    <select name="id_materia" class="select-materia" required>
+                        <option value="">Materia 3</option>
+                    </select>
+                </div>
 
                 <script>
-                document.querySelector('form').onsubmit = function(e) {
-                    const select = document.getElementById('id_materia');
-                    const seleccionadas = Array.from(select.selectedOptions).length;
+                function cargarMaterias() {
+                    const idCarrera = document.getElementById('id_carrera').value;
+                    const selectsMaterias = document.querySelectorAll('.select-materia');
 
-                    if (seleccionadas < 3 || seleccionadas > 5) {
-                        e.preventDefault();
-                        alert("Debes seleccionar entre 3 y 5 materias.");
+                    if (!idCarrera) {
+                        selectsMaterias.forEach(s => s.innerHTML = '<option value="">Selecciona carrera</option>');
+                        return;
                     }
-                };
-                </script>
 
-                <script>
-                function cargarMaterias(idCarrera) {
-                    const selectMateria = document.getElementById('select-materia');
-                    selectMateria.innerHTML = '<option>Cargando...</option>';
-
-                    if (!idCarrera) return;
-
-                    fetch('/obtener_materias/' + idCarrera)
+                    fetch(`/obtener_materias/${idCarrera}`)
                         .then(response => response.json())
                         .then(data => {
-                            selectMateria.innerHTML = '<option value="">Selecciona una materia</option>';
-                            data.forEach(materia => {
-                                selectMateria.innerHTML += `<option value="${materia.id}">${materia.nombre_materia}</option>`;
+                            selectsMaterias.forEach((select, index) => {
+                                let opciones = `<option value="">Selecciona Materia ${index + 1}</option>`;
+                                data.forEach(materia => {
+                                    opciones += `<option value="${materia.id}">${materia.nombre_materia}</option>`;
+                                });
+                                select.innerHTML = opciones;
                             });
                         });
                 }
