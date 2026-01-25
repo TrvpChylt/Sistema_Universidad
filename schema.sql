@@ -38,9 +38,3 @@ CREATE TABLE inscripciones (
     FOREIGN KEY (id_alumno) REFERENCES alumnos (id),
     FOREIGN KEY (id_materia) REFERENCES materias (id)
 );
-
--- 6. Insertar datos iniciales para que no aparezca vacío el select
-INSERT INTO carreras_universitarias (nombre_carrera) VALUES 
-('Ingeniería en Informática'),
-('Licenciatura en Administración'),
-('Derecho');
