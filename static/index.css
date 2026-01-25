@@ -100,37 +100,49 @@ header {
 .seccion-cartas {
     display: flex;
     justify-content: center;
-    gap: 30px;
-    padding: 60px 20px;
-    flex-wrap: wrap;
-    padding: 20px;
+    padding: 40px 20px;
 }
 
-/* Estilo de los botones/tarjetas */
+.contenedor-grid {
+    display: flex;           
+    flex-direction: row;     
+    flex-wrap: wrap;         
+    gap: 20px;               
+    justify-content: center; 
+    max-width: 1200px; /* Evita que las cartas se estiren demasiado en pantallas gigantes */
+}
+
+/* Estilo de las tarjetas (Cambiado .card por .carta) */
 .carta {
-    background-color: #e74c3c; /* Color similar al de tu imagen */
+    background-color: #e74c3c; 
     color: white;
     width: 250px;
     padding: 30px 20px;
-    border-radius: 15px;
+    border-radius: 25px; /* Aumentado para que se vea como en tu foto */
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: transform 0.3s ease, background-color 0.3s;
+    text-decoration: none; /* Por si las usas como enlaces */
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    background-color: #d64535;
+/* Corregido: de .card:hover a .carta:hover */
+.carta:hover {
+    transform: translateY(-10px);
+    background-color: #c0392b;
 }
 
-.card strong {
-    display: block;
-    font-size: 1.2rem;
-    margin-top: 10px;
+.carta h3 {
+    margin: 15px 0 5px 0;
+    font-size: 1.3rem;
 }
 
-.card small {
-    font-size: 0.9rem;
+.carta p {
+    font-size: 0.95rem;
     opacity: 0.9;
+    margin: 0;
+}
+
+.icono {
+    font-size: 2rem;
 }
