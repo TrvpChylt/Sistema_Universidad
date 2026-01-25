@@ -57,17 +57,12 @@ def registro():
     # 1. Obtención de datos básicos del formulario
     nombre = request.form.get('nombre')
     apellido = request.form.get('apellido')
-    cedula = request.form.get('cedula')
     correo = request.form.get('correo')
     clave = request.form.get('clave')
     id_carrera = request.form.get('id_carrera')
     
-    # 2. Obtener la lista de IDs de las materias (los 3 selects con name="id_materia")
-    # request.form.getlist capturará todos los valores de los selects en una lista ['1', '5', '8']
     materias_seleccionadas = request.form.getlist('id_materia')
     
-    # 3. Limpieza y validación: eliminamos duplicados y valores vacíos
-    # set() elimina duplicados en caso de que el usuario elija la misma materia en dos selects
     materias_unicas = list(set([m for m in materias_seleccionadas if m]))
 
     if len(materias_unicas) < 3:
@@ -83,8 +78,8 @@ def registro():
         
         # 5. Insertar los datos del alumno
         cursor.execute("""
-        INSERT INTO alumnos (nombre, apellido, cedula, correo, clave, id_carrera) 
-        VALUES (?, ?, ?, ?, ?, ?) """, (nombre, apellido, cedula, correo, password_hash, id_carrera))
+        INSERT INTO alumnos (nombre, apellido, correo, clave, id_carrera) 
+        VALUES (?, ?, ?, ?, ?, ?) """, (nombre, apellido, correo, password_hash, id_carrera))
         
         id_nuevo_alumno = cursor.lastrowid
         

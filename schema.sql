@@ -10,7 +10,6 @@ CREATE TABLE IF NOT EXISTS alumnos (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nombre TEXT NOT NULL,
     apellido TEXT NOT NULL,
-    cedula TEXT UNIQUE NOT NULL,
     correo TEXT UNIQUE NOT NULL,
     clave TEXT NOT NULL,
     id_carrera INTEGER, 
