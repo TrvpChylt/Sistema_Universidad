@@ -44,7 +44,7 @@ def formulario_registro():
 def obtener_materias(id_carrera):
     conn = get_db_connection()
     materias = conn.execute(
-        "SELECT id, nombre_materia FROM materias WHERE carrera_id = ?", 
+        "SELECT id, nombre_materia FROM materias WHERE id_carrera = ?", 
         (id_carrera,)
     ).fetchall()
     conn.close()
