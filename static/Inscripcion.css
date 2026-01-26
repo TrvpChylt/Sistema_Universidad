@@ -1,53 +1,74 @@
+/* 1. Ajuste Global: El reset necesario */
+* {
+    box-sizing: border-box; /* Esto evita que el padding ensanche los elementos */
+}
+
 body {
     background-color: #f4f7f6;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    /* min-height permite que el fondo crezca si el contenido es largo */
+    min-height: 100vh; 
     margin: 0;
+    padding: 20px; /* Margen de seguridad para que no toque los bordes del celular */
 }
 
+/* 2. Contenedor: Ahora es elástico */
 .contenedor_registro {
     background: white;
-    padding: 30px;
+    padding: 25px;
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,10);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
     width: 100%;
-    max-width: 400px;
+    max-width: 400px; /* No crecerá más de esto, pero se encogerá en móviles */
 }
 
-h2 { text-align: center; color: #F54927; }
+h2 { 
+    text-align: center; 
+    color: #F54927; 
+    margin-top: 0;
+}
 
-form { display: flex; flex-direction: column; gap: 15px; }
+form { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 15px; 
+}
 
-select {
+/* 3. Inputs y Selects: Sin desbordamientos */
+select, input {
+    width: 100%; /* Siempre ocupan el ancho de su padre */
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
     font-size: 16px;
+    border-radius: 5px;
 }
 
 input {
-    width: 100%;
-    padding: 12px 0; 
-    margin: 10px;
-    border: none;               
+    /* Estilo "Línea Inferior" que tenías */
+    border: none;              
     border-bottom: 2px solid #000000;
     border-radius: 0;          
     outline: none;           
     background: transparent;
-    box-sizing: border-box; 
+    margin: 5px 0; /* Margen arriba/abajo para separar, 0 a los lados */
 }
 
 input:focus {
     border-bottom: 2px solid #F54927;
 }
 
-label { font-weight: bold; margin-bottom: -10px; color: #555; }
+label { 
+    font-weight: bold; 
+    color: #555; 
+    margin-bottom: -5px; 
+}
 
+/* 4. Botones: Adaptables */
 button, .btn-volver {
-    padding: 10px 20px;     
+    width: 100%;
+    padding: 12px;
     margin-top: 10px; 
     background-color: #1e1f20;
     color: white;
@@ -57,36 +78,31 @@ button, .btn-volver {
     font-weight: 600;
     font-size: 16px;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
     text-align: center;
     display: block;        
     text-decoration: none;
-    box-sizing: border-box; 
-    width: 100%;           
 }
 
 button:hover, .btn-volver:hover {
     background-color: #fc866e; 
     transform: translateY(-2px); 
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    color: white;/
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-button:active {
-    transform: translateY(0); 
-}
-
+/* 5. Sección de Materias con Scroll */
 .contenedor-materias {
     display: flex;
-    flex-direction: column; /* Uno debajo del otro */
-    gap: 15px;             /* Espacio entre ellos */
-    margin-top: 10px;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 5px;
+    /* Si hay muchas materias, esto crea un scroll interno en vez de alargar todo el formulario */
+    max-height: 200px; 
+    overflow-y: auto;
+    padding: 5px;
+    border: 1px solid #eee;
 }
 
 .select-materia {
     width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    background-color: white;
+    padding: 8px;
 }

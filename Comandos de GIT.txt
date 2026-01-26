@@ -1,5 +1,0 @@
-1. Guardar cambios	Tu PC	git add . seguido de git commit -m "mensaje"
-2. Subir a la nube	Tu PC	git push origin main
-3. Bajar al servidor	Consola Bash	git pull origin main
-4. Aplicar	Pestaña Web	Botón Reload
-
