@@ -6,15 +6,17 @@ import os
 app = Flask(__name__)
 app.secret_key = 'mi_llave_secreta_universitaria'
 
+
+
 def get_db_connection():
-    # Esto busca el archivo en la misma carpeta donde está app.py
     base_dir = os.path.dirname(os.path.abspath(__file__))
     database_path = os.path.join(base_dir, 'database.db')
     
     conn = sqlite3.connect(database_path)
     conn.row_factory = sqlite3.Row 
     return conn
-# --- Rutas ---
+
+
 
 @app.route('/')
 def index():
@@ -40,6 +42,7 @@ def formulario_registro():
     conn.close()
     return render_template('inscripcion.html', carreras=carreras)
 
+
 @app.route('/obtener_materias/<int:id_carrera>')
 def obtener_materias(id_carrera):
     conn = get_db_connection()
@@ -51,10 +54,8 @@ def obtener_materias(id_carrera):
     return jsonify([dict(ix) for ix in materias])
 
 
-
 @app.route('/procesar_registro', methods=['POST'])
 def registro():
-    # 1. Obtención de datos básicos del formulario
     nombre = request.form.get('nombre')
     apellido = request.form.get('apellido')
     correo = request.form.get('correo')
@@ -69,21 +70,19 @@ def registro():
         flash("Debes seleccionar al menos 3 materias diferentes.")
         return redirect(url_for('formulario_registro'))
 
-    # 4. Generar el hash de la contraseña por seguridad
+
     password_hash = generate_password_hash(clave)
 
     conn = get_db_connection()
     try:
         cursor = conn.cursor()
         
-        # 5. Insertar los datos del alumno
         cursor.execute("""
         INSERT INTO alumnos (nombre, apellido, correo, clave, id_carrera) 
         VALUES (?, ?, ?, ?, ?) """, (nombre, apellido, correo, password_hash, id_carrera))
         
         id_nuevo_alumno = cursor.lastrowid
-        
-        # 6. Insertar cada una de las materias en la tabla de inscripciones
+  
         for id_materia in materias_unicas:
             cursor.execute("""
                 INSERT INTO inscripciones (id_alumno, id_materia, fecha_inscripcion) 
@@ -109,6 +108,7 @@ def registro():
 def login_page():
     return render_template('login.html')
 
+
 @app.route('/procesar_login', methods=['POST'])
 def login():
     correo = request.form['correo']
@@ -125,6 +125,7 @@ def login():
     
     flash("Correo o contraseña incorrectos")
     return redirect(url_for('login_page'))
+
 
 @app.route('/logout')
 def logout():

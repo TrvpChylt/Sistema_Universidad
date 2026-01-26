@@ -2,13 +2,11 @@ import sqlite3
 
 connection = sqlite3.connect('database.db')
 
-# 1. Ejecuta el esquema (solo creación de tablas)
 with open('schema.sql') as f:
     connection.executescript(f.read())
 
 cur = connection.cursor()
 
-# 2. Insertar Carreras
 cur.execute("INSERT INTO carreras_universitarias (nombre_carrera) VALUES (?)", ('Ingeniería en Informática',))
 id_informatica = cur.lastrowid 
 
@@ -41,9 +39,8 @@ materias = [
     ('Filosofía del Derecho', id_derecho)
 ]
 
-# 4. Insertar Materias (Cambiado carrera_id por id_carrera para que coincida con tu SQL)
 cur.executemany("INSERT INTO materias (nombre_materia, id_carrera) VALUES (?, ?)", materias)
 
 connection.commit()
 connection.close()
-print("¡Base de datos creada y poblada con éxito!")
+print("Base de datos creada, Carreras cargadas y Materias cargadas")
