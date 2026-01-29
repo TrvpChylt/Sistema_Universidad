@@ -1,4 +1,3 @@
-/* Estilos generales para el Header */
 *{
     margin: 0;
     padding: 0;
@@ -49,7 +48,6 @@ header {
     background-color: #2e2f30;
 }
 
-/* Sección Principal (Hero) */
 .contenedor-principal {
     display: flex;
     flex-direction: row;
@@ -91,12 +89,10 @@ header {
     box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
-/* Botón especial Salir */
 .btn-salir {
     background-color: #e74c3c !important;
 }
 
-/* Contenedor principal */
 .seccion-cartas {
     display: flex;
     justify-content: center;
@@ -109,24 +105,22 @@ header {
     flex-wrap: wrap;         
     gap: 20px;               
     justify-content: center; 
-    max-width: 1200px; /* Evita que las cartas se estiren demasiado en pantallas gigantes */
+    max-width: 1200px; 
 }
 
-/* Estilo de las tarjetas (Cambiado .card por .carta) */
 .carta {
     background-color: #e74c3c; 
     color: white;
     width: 250px;
     padding: 30px 20px;
-    border-radius: 25px; /* Aumentado para que se vea como en tu foto */
+    border-radius: 25px; 
     text-align: center;
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     cursor: pointer;
     transition: transform 0.3s ease, background-color 0.3s;
-    text-decoration: none; /* Por si las usas como enlaces */
+    text-decoration: none;
 }
 
-/* Corregido: de .card:hover a .carta:hover */
 .carta:hover {
     transform: translateY(-10px);
     background-color: #c0392b;

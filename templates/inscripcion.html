@@ -24,7 +24,7 @@
                 {% endfor %}
             </select>
 
-            <label>Selecciona tus 3 materias:</label>
+            <label>Selecciona tus 3 materias de preferencia:</label>
             <div class="contenedor-materias">
                 <select name="id_materia" class="materia-select" required><option>Materia 1</option></select>
                 <select name="id_materia" class="materia-select" required><option>Materia 2</option></select>
@@ -41,12 +41,10 @@
                         return;
                     }
 
-                    // Llamada a la ruta de Flask
                     fetch('/obtener_materias/' + idCarrera)
                         .then(response => response.json())
                         .then(data => {
                             selects.forEach((select, index) => {
-                                // Limpiar contenido previo
                                 select.innerHTML = ''; 
                                 
                                 let opciones = `<option value="">Seleccionar Materia ${index + 1}</option>`;
