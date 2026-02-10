@@ -115,12 +115,20 @@ def login():
     clave_ingresada = request.form['clave']
 
     conn = get_db_connection()
-    alumno = conn.execute("SELECT * FROM alumnos WHERE correo = ?", (correo,)).fetchone()
+    
+    usuario = conn.execute("SELECT * FROM alumnos WHERE correo = ?", (correo,)).fetchone()
+    rol = 'alumno'
+
+    if not usuario:
+        usuario = conn.execute("SELECT * FROM administradores WHERE correo = ?", (correo,)).fetchone()
+        rol = 'admin'
+
     conn.close()
 
-    if alumno and check_password_hash(alumno['clave'], clave_ingresada):
-        session['usuario_id'] = alumno['id']
-        session['nombre'] = alumno['nombre']
+    if usuario and check_password_hash(usuario['clave'], clave_ingresada):
+        session['usuario_id'] = usuario['id']
+        session['nombre'] = usuario['nombre']
+        session['rol'] = rol
         return redirect(url_for('index'))
     
     flash("Correo o contraseña incorrectos")

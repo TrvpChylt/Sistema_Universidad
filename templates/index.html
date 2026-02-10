@@ -14,10 +14,16 @@
             <ul>
                 {% if session.get('usuario_id') %}
                     <li><a href="{{ url_for('perfil', usuario_id=session['usuario_id']) }}">Mi Perfil</a></li>
+
+                    {% if session.get('rol') == 'admin' %}
+                        <li><a href="/gestion_alumnos" style="color: #ffcc00;">Gestionar Alumnos</a></li>
+                        <li><a href="/reportes" style="color: #ffcc00;">Reportes Globales</a></li>
+                    {% endif %}
+
                     <li><a href="{{ url_for('logout') }}">Cerrar Sesión</a></li>
                 {% else %}
                     <li><a href="{{ url_for('login_page') }}">Inicio de Sesión</a></li>
-                    <li><li><a href="{{ url_for('formulario_registro') }}">Inscripción</a></li>
+                    <li><a href="{{ url_for('formulario_registro') }}">Inscripción</a></li>
                 {% endif %}
             </ul>
         </div>
@@ -37,7 +43,7 @@
         </div>
     </div>
 
-    {% if session.get('usuario_id') %}
+    {% if session.get('usuario_id') and session.get('rol') == 'alumno' %}
     <section class="seccion-cartas">
         <div class="contenedor-grid">
             {% for materia in materias %}
