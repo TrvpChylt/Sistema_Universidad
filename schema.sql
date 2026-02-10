@@ -33,3 +33,14 @@ CREATE TABLE inscripciones (
     FOREIGN KEY (id_alumno) REFERENCES alumnos (id),
     FOREIGN KEY (id_materia) REFERENCES materias (id)
 );
+
+CREATE TABLE administradores (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nombre TEXT NOT NULL,
+    apellido TEXT NOT NULL,
+    correo TEXT UNIQUE NOT NULL,
+    clave TEXT NOT NULL,
+    fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO administradores (nombre, apellido, correo, clave) VALUES ('Jesus', 'Tecnico', 'admin@gmail.com', '123');
