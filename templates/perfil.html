@@ -1,26 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Perfil de {{ alumno['nombre'] }}</title>
+    <title>Perfil de {{ usuario['nombre'] }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='perfil.css') }}">
 </head>
 <body>
-    <h1>Perfil de {{ alumno['nombre'] }}</h1>
+    <h1>Perfil de {{ usuario['nombre'] }} ({{ session['rol']|capitalize }})</h1>
     <div class="card">
-        <p><strong>Nombre:</strong> {{ alumno['nombre'] }}</p>
-        <p><strong>Email:</strong> {{ alumno['apellido'] }}</p>
-        <p><strong>Email:</strong> {{ alumno['correo'] }}</p>
-        <p><strong>Carrera:</strong> {{ alumno['nombre_carrera'] }}</p> <hr>
+        <p><strong>Nombre:</strong> {{ usuario['nombre'] }}</p>
+        <p><strong>Email:</strong> {{ usuario['apellido'] }}</p>
+        <p><strong>Email:</strong> {{ usuario['correo'] }}</p>
 
+        {% if session['rol'] == 'alumno' %}
+            <p><strong>Carrera:</strong> {{ usuario['nombre_carrera'] }}</p> 
+            <hr>
+            <h3>Materias Inscritas</h3>
+            <ul>
+                {% for materia in materias %}
+                    <li>{{ materia['nombre_materia'] }}</li>
+                {% else %}
+                    <li>No hay materias inscritas.</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
 
-        <h3>Materias Inscritas</h3>
-        <ul>
-            {% for materia in materias %}
-                <li>{{ materia['nombre_materia'] }}</li>
-            {% else %}
-                <li>No hay materias inscritas.</li>
-            {% endfor %}
-        </ul>
+        {% if session['rol'] == 'admin' %}
+            <p><strong>Fecha de Registro:</strong> {{ usuario['fecha_registro'] }}</p>
+            <hr>
+            <div class="admin-badge">Panel de Control de Administrador</div>
+        {% endif %}
 
         <button onclick="abrirModal()" class="btn-edit">Editar</button>
         <a href="{{ url_for('index') }}" class="btn-volver">Volver al Home</a>
@@ -31,15 +39,15 @@
         <div class="modal-content">
             <span class="close" onclick="cerrarModal()">&times;</span>
             <h2>Editar Perfil</h2>
-            <form action="{{ url_for('editar_estudiante', usuario_id=alumno['id']) }}" method="POST">
+            <form action="{{ url_for('editar_estudiante', usuario_id=usuario['id']) }}" method="POST">
                 <label>Nombre:</label>
-                <input type="text" name="nombre" value="{{ alumno['nombre'] }}" required>
+                <input type="text" name="nombre" value="{{ usuario['nombre'] }}" required>
                 
                 <label>Apellido:</label>
-                <input type="text" name="apellido" value="{{ alumno['apellido'] }}" required>
+                <input type="text" name="apellido" value="{{ usuario['apellido'] }}" required>
                 
                 <label>Email:</label>
-                <input type="email" name="correo" value="{{ alumno['correo'] }}" required>
+                <input type="email" name="correo" value="{{ usuario['correo'] }}" required>
                 
                 <button type="submit" class="btn-guardar">Guardar Cambios</button>
             </form>
@@ -55,7 +63,6 @@
             document.getElementById("modalEditar").style.display = "none";
         }
 
-        // Cerrar si el usuario hace clic fuera de la caja blanca
         window.onclick = function(event) {
             let modal = document.getElementById("modalEditar");
             if (event.target == modal) {
