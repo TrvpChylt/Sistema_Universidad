@@ -117,15 +117,16 @@ def login():
     conn = get_db_connection()
     
     usuario = conn.execute("SELECT * FROM alumnos WHERE correo = ?", (correo,)).fetchone()
-    rol = 'alumno'
-
-    if not usuario:
+    
+    if usuario:
+        rol = 'alumno'
+    else:
         usuario = conn.execute("SELECT * FROM administradores WHERE correo = ?", (correo,)).fetchone()
         rol = 'admin'
 
     conn.close()
 
-    if usuario and check_password_hash(usuario['clave'], clave_ingresada):
+    if usuario and usuario['clave'] == clave_ingresada:
         session['usuario_id'] = usuario['id']
         session['nombre'] = usuario['nombre']
         session['rol'] = rol
