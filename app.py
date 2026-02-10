@@ -71,15 +71,13 @@ def registro():
         return redirect(url_for('formulario_registro'))
 
 
-    password_hash = generate_password_hash(clave)
-
     conn = get_db_connection()
     try:
         cursor = conn.cursor()
         
         cursor.execute("""
         INSERT INTO alumnos (nombre, apellido, correo, clave, id_carrera) 
-        VALUES (?, ?, ?, ?, ?) """, (nombre, apellido, correo, password_hash, id_carrera))
+        VALUES (?, ?, ?, ?, ?) """, (nombre, apellido, correo, clave, id_carrera))
         
         id_nuevo_alumno = cursor.lastrowid
   
@@ -144,31 +142,41 @@ def logout():
 
 @app.route('/perfil/<int:usuario_id>')
 def perfil(usuario_id):
+    rol_actual = session.get('rol')
     conn = get_db_connection()
 
-    query_alumno = """
-        SELECT a.*, c.nombre_carrera 
-        FROM alumnos a
-        JOIN carreras_universitarias c ON a.id_carrera = c.id
-        WHERE a.id = ?
-    """
-    alumno = conn.execute(query_alumno, (usuario_id,)).fetchone()
+    usuario = None
+    materias = []
 
-    if alumno is None:
-        flash("Alumno no encontrado.")
+    if rol_actual == 'alumno':
+        query_alumno = """
+            Select a.*, cn.nombre_carrera
+            From alumnos a
+            Left Join carreras_universitarias cn ON a.id_carrera = cn.id
+            Where a.id = ?
+        """
+
+        usuario = conn.execute(query_alumno, (usuario_id,)).fetchone()
+
+        query_materias = """
+            SELECT m.nombre_materia 
+            FROM materias m
+            JOIN inscripciones i ON m.id = i.id_materia
+            WHERE i.id_alumno = ?
+        """
+        materias = conn.execute(query_materias, (usuario_id,)).fetchall()
+
+    elif rol_actual == 'admin':
+        query_admin = "SELECT * FROM administradores WHERE id = ?"
+        usuario = conn.execute(query_admin, (usuario_id,)).fetchone()
+
+        conn.close()
+
+    if usuario is None:
+        flash("Usuario no encontrado.")
         return redirect(url_for('index'))
-        
-    query_materias = """
-        SELECT m.nombre_materia 
-        FROM materias m
-        JOIN inscripciones i ON m.id = i.id_materia
-        WHERE i.id_alumno = ?
-    """
-
-    materias = conn.execute(query_materias, (usuario_id,)).fetchall()
     
-    conn.close()
-    return render_template('perfil.html', alumno=alumno, materias=materias)
+    return render_template('perfil.html', usuario=usuario, materias=materias)
 
 
 @app.route('/editar/<int:usuario_id>', methods=['POST'])
@@ -176,14 +184,20 @@ def editar_estudiante(usuario_id):
     nombre = request.form['nombre']
     apellido = request.form['apellido']
     correo = request.form['correo']
+    rol = session.get('rol')
     
     conn = get_db_connection()
-    conn.execute('UPDATE alumnos SET nombre = ?, apellido = ?, correo = ? WHERE id = ?',
-                 (nombre, apellido, correo, usuario_id))
+
+    if rol == 'alumno':
+        conn.execute('UPDATE alumnos SET nombre = ?, apellido = ?, correo = ? WHERE id = ?',
+                     (nombre, apellido, correo, usuario_id))
+    elif rol == 'admin':
+        conn.execute('UPDATE administradores SET nombre = ?, apellido = ?, correo = ? WHERE id = ?',
+                     (nombre, apellido, correo, usuario_id))
     conn.commit()
     conn.close()
     
-    flash("¡Perfil actualizado!")
+    flash("Perfil actualizado")
     return redirect(url_for('perfil', usuario_id=usuario_id))
 
 if __name__ == '__main__':
