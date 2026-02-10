@@ -1,5 +1,11 @@
-venv/ 
-.venv/ 
-__pycache__/ 
-database.db 
-
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+venv/
+ENV/
+instance/
+.pytest_cache/
+.vscode/
+.idea/
+*.db
