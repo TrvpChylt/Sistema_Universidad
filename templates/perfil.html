@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Perfil de {{ alumno['nombre'] }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='perfil.css') }}">
+</head>
+<body>
+    <h1>Perfil de {{ alumno['nombre'] }}</h1>
+    <div class="card">
+        <p><strong>Nombre:</strong> {{ alumno['nombre'] }}</p>
+        <p><strong>Email:</strong> {{ alumno['apellido'] }}</p>
+        <p><strong>Email:</strong> {{ alumno['correo'] }}</p>
+        <p><strong>Carrera:</strong> {{ alumno['nombre_carrera'] }}</p> <hr>
+
+
+        <h3>Materias Inscritas</h3>
+        <ul>
+            {% for materia in materias %}
+                <li>{{ materia['nombre_materia'] }}</li>
+            {% else %}
+                <li>No hay materias inscritas.</li>
+            {% endfor %}
+        </ul>
+
+        <button onclick="abrirModal()" class="btn-edit">Editar</button>
+        <a href="{{ url_for('index') }}" class="btn-volver">Volver al Home</a>
+    </div>
+
+
+    <div id="modalEditar" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="cerrarModal()">&times;</span>
+            <h2>Editar Perfil</h2>
+            <form action="{{ url_for('editar_estudiante', usuario_id=alumno['id']) }}" method="POST">
+                <label>Nombre:</label>
+                <input type="text" name="nombre" value="{{ alumno['nombre'] }}" required>
+                
+                <label>Apellido:</label>
+                <input type="text" name="apellido" value="{{ alumno['apellido'] }}" required>
+                
+                <label>Email:</label>
+                <input type="email" name="correo" value="{{ alumno['correo'] }}" required>
+                
+                <button type="submit" class="btn-guardar">Guardar Cambios</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function abrirModal() {
+            document.getElementById("modalEditar").style.display = "block";
+        }
+
+        function cerrarModal() {
+            document.getElementById("modalEditar").style.display = "none";
+        }
+
+        // Cerrar si el usuario hace clic fuera de la caja blanca
+        window.onclick = function(event) {
+            let modal = document.getElementById("modalEditar");
+            if (event.target == modal) {
+                cerrarModal();
+            }
+        }
+    </script>
+</body>
+</html>

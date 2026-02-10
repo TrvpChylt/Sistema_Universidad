@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesión</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+</head>
+<body>
+
+    <div class="contenedor_registro">
+        <h2>Inicio de Sesión</h2>
+        
+        <form action="/procesar_login" method="POST">
+    
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                {% for message in messages %}
+                  <p style="color: rgb(250, 0, 0);">{{ message }}</p>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+
+            <input type="email" name="correo" placeholder="Correo Institucional" required>
+            <input type="password" name="clave" placeholder="Contraseña" required>
+            
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+        
+        <a href="{{ url_for('index') }}"><button>Volver al Inicio</button></a>
+    </div>
+</body>
+</html>

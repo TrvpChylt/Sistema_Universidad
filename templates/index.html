@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Universidad - Facultad de Informática</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+<body>
+    <header>
+        <div class="contenedor-header">
+            <div class="titulo-uni">
+                <p>Universidad</p>
+            </div>
+            <ul>
+                {% if session.get('usuario_id') %}
+                    <li><a href="{{ url_for('perfil', usuario_id=session['usuario_id']) }}">Mi Perfil</a></li>
+                    <li><a href="{{ url_for('logout') }}">Cerrar Sesión</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('login_page') }}">Inicio de Sesión</a></li>
+                    <li><li><a href="{{ url_for('formulario_registro') }}">Inscripción</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </header>
+
+    <div class="contenedor-principal">
+        <div class="contendor-texto">
+            <h1>Bienvenidos</h1>
+            <p class="texto-principal">
+                "La Facultad de Informática, el espacio donde transformamos el código en soluciones para el 
+                mundo real. Esta plataforma es tu puerta de acceso a la innovación y al crecimiento académico..."
+            </p>
+        </div>
+
+        <div class="contenedor-img">
+            <img class="img-principal" src="{{ url_for('static', filename='assets/ingenieria-informatica.jpg') }}" alt="Imagen de Presentacion">
+        </div>
+    </div>
+
+    {% if session.get('usuario_id') %}
+    <section class="seccion-cartas">
+        <div class="contenedor-grid">
+            {% for materia in materias %}
+                <div class="carta">
+                    <div class="icono">📚</div>
+                    <h3>{{ materia['nombre_materia'] }}</h3>
+                    <p>Estado: Inscrita</p>
+                </div>
+            {% endfor %}
+        </div>
+    </section> 
+    {% endif %}
+</body>
+</html>

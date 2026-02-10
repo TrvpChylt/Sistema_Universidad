@@ -1,0 +1,62 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.contenedor_registro {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,10);
+    width: 350px;
+    text-align: center;
+}
+
+h2 { color: #F54927; }
+
+input {
+    width: 100%;
+    padding: 12px 0; 
+    margin: 10px;
+    border: none;               
+    border-bottom: 2px solid #000000;
+    border-radius: 0;          
+    outline: none;           
+    background: transparent;
+    box-sizing: border-box; 
+}
+
+input:focus {
+    border-bottom: 2px solid #F54927;
+}
+
+
+button {
+    padding: 10px 20px;     
+    margin-top: 10px; 
+    background-color: #1e1f20;
+    color: white;
+    border: none;
+    border-radius: 8px;      
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+button:hover {
+    background-color: #fc866e; 
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+button:active {
+    transform: translateY(0); 
+}
+

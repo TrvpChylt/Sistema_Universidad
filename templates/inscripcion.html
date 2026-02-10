@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Inscripcion.css') }}">
+    <title>Inscripcion de Universidad</title>
+</head>
+<body>
+    <div class="contenedor_registro">
+        <h2>Registro de Alumno</h2>
+        
+        <form action="/procesar_registro" method="POST">
+            <input type="text" name="nombre" placeholder="Nombre" required>
+            <input type="text" name="apellido" placeholder="Apellido" required>
+            <input type="email" name="correo" placeholder="Correo electrónico" required>
+            <input type="password" name="clave" placeholder="Contraseña" required>
+            
+            <label for="id_carrera">Carrera:</label>
+            <select name="id_carrera" id="id_carrera" onchange="cargarMaterias()" required>
+                <option value="">Selecciona una carrera</option>
+                {% for carrera in carreras %}
+                    <option value="{{ carrera.id }}">{{ carrera.nombre_carrera }}</option>
+                {% endfor %}
+            </select>
+
+            <label>Selecciona tus 3 materias de preferencia:</label>
+            <div class="contenedor-materias">
+                <select name="id_materia" class="materia-select" required><option>Materia 1</option></select>
+                <select name="id_materia" class="materia-select" required><option>Materia 2</option></select>
+                <select name="id_materia" class="materia-select" required><option>Materia 3</option></select>
+            </div>
+
+                <script>
+                    function cargarMaterias() {
+                    const idCarrera = document.getElementById('id_carrera').value;
+                    const selects = document.querySelectorAll('.materia-select');
+
+                    if (!idCarrera) {
+                        selects.forEach(s => s.innerHTML = '<option value="">Selecciona carrera</option>');
+                        return;
+                    }
+
+                    fetch('/obtener_materias/' + idCarrera)
+                        .then(response => response.json())
+                        .then(data => {
+                            selects.forEach((select, index) => {
+                                select.innerHTML = ''; 
+                                
+                                let opciones = `<option value="">Seleccionar Materia ${index + 1}</option>`;
+                                data.forEach(materia => {
+                                    opciones += `<option value="${materia.id}">${materia.nombre_materia}</option>`;
+                                });
+                                select.innerHTML = opciones;
+                            });
+                        })
+                        .catch(error => console.error('Error:', error));
+                }
+                </script>
+            
+            <button type="submit">Finalizar Inscripción</button> 
+            <a href="{{ url_for('index') }}" class="btn-volver">Volver al Inicio</a>
+        </form>
+        
+       
+      </div>
+</body>
+</html>
