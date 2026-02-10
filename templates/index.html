@@ -17,7 +17,6 @@
 
                     {% if session.get('rol') == 'admin' %}
                         <li><a href="/gestion_alumnos" >Gestionar Alumnos</a></li>
-                        <li><a href="/reportes">Reportes Globales</a></li>
                     {% endif %}
 
                     <li><a href="{{ url_for('logout') }}">Cerrar Sesión</a></li>
