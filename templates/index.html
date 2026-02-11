@@ -16,7 +16,7 @@
                     <li><a href="{{ url_for('perfil', usuario_id=session['usuario_id']) }}">Mi Perfil</a></li>
 
                     {% if session.get('rol') == 'admin' %}
-                        <li><a href="/gestion_alumnos" >Gestionar Alumnos</a></li>
+                        <li><a href="/admin/alumnos" >Gestionar Alumnos</a></li>
                     {% endif %}
 
                     <li><a href="{{ url_for('logout') }}">Cerrar Sesión</a></li>
