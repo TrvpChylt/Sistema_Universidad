@@ -200,5 +200,40 @@ def editar_estudiante(usuario_id):
     flash("Perfil actualizado")
     return redirect(url_for('perfil', usuario_id=usuario_id))
 
+
+
+@app.route('/admin/alumnos')
+def gestion_alumnos():
+    if session.get('rol') != 'admin':
+        flash("Acceso denegado.")
+        return redirect(url_for('index'))
+
+    conn = get_db_connection()
+    alumnos = conn.execute('''
+        SELECT a.id, a.nombre, a.apellido, a.correo, c.nombre_carrera 
+        FROM alumnos a
+        LEFT JOIN carreras_universitarias c ON a.id_carrera = c.id
+    ''').fetchall()
+    conn.close()
+    
+    return render_template('gestion_alumnos.html', alumnos=alumnos)
+
+
+
+@app.route('/admin/eliminar_alumno/<int:id>')
+def eliminar_alumno(id):
+    if session.get('rol') != 'admin':
+        return redirect(url_for('index'))
+
+    conn = get_db_connection()
+    
+    conn.execute('DELETE FROM inscripciones WHERE id_alumno = ?', (id,))
+    conn.execute('DELETE FROM alumnos WHERE id = ?', (id,))
+    conn.commit()
+    conn.close()
+
+    flash("Alumno eliminado correctamente.")
+    return redirect(url_for('gestion_alumnos'))
+
 if __name__ == '__main__':
     app.run(debug=True)

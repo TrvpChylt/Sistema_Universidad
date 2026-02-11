@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='gestion_A.css') }}">
+    <title>Gestión de Alumnos</title>
+</head>
+<body>
+    <h1>Modulo de Gestión de Alumnos</h1>
+    <a href="{{ url_for('index') }}">Volver al Inicio</a>
+
+    <hr>
+
+    <table border="1" style="width:100%; border-collapse: collapse;">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Correo</th>
+                <th>Carrera</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for alumno in alumnos %}
+            <tr>
+                <td>{{ alumno['id'] }}</td>
+                <td>{{ alumno['nombre'] }}</td>
+                <td>{{ alumno['apellido'] }}</td>
+                <td>{{ alumno['correo'] }}</td>
+                <td>{{ alumno['nombre_carrera'] }}</td>
+                <td>
+                    <a href="{{ url_for('perfil', usuario_id=alumno['id']) }}">Ver Perfil</a> | 
+                    <button type="button" 
+                        data-id="{{ alumno['id'] }}" 
+                        onclick="confirmarEliminar(this.getAttribute('data-id'))">
+                        Eliminar
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        function confirmarEliminar(id) {
+            if (confirm('¿Estás seguro de que deseas eliminar este alumno?')) {
+                window.location.href = "/admin/eliminar_alumno/" + id;
+            }
+        }
+    </script>
+</body>
+</html>
