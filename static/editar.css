@@ -1,17 +1,15 @@
-/* Contenedor principal para centrar el formulario */
 .edit-container {
     max-width: 500px;
     margin: 50px auto;
     background: #fff;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Encabezado similar al color de tu tabla */
 .edit-container h2 {
-    background-color: #e64a19; /* El naranja rojizo de tu imagen */
+    background-color: #e64a19;
     color: white;
     margin: -20px -20px 20px -20px;
     padding: 15px;
@@ -20,7 +18,6 @@
     font-size: 1.5rem;
 }
 
-/* Estilo de los grupos de entrada */
 .form-group {
     margin-bottom: 15px;
 }
@@ -37,7 +34,7 @@
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    box-sizing: border-box; /* Evita que el input se salga del contenedor */
+    box-sizing: border-box;
     font-size: 1rem;
 }
 
@@ -47,7 +44,6 @@
     box-shadow: 0 0 5px rgba(230, 74, 25, 0.3);
 }
 
-/* Botón de Guardar */
 .btn-guardar {
     width: 100%;
     background-color: #e64a19;
