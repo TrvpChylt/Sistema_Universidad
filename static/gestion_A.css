@@ -13,27 +13,20 @@ h1 {
     margin-bottom: 30px;
 }
 
-/* Enlaces de navegación */
 a {
-    background-color: #F54927;
     text-decoration: none;
     color: #fff;
     font-weight: bold;
     transition: color 0.3s;
 }
 
-a:hover {
-    color: #2980b9;
-}
-
-/* Contenedor de la Tabla */
 table {
     width: 100%;
     border-collapse: collapse;
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     border-radius: 8px;
-    overflow: hidden; /* Para que las esquinas redondeadas funcionen */
+    overflow: hidden; 
     margin-top: 20px;
 }
 
@@ -74,15 +67,4 @@ button {
 
 button:hover {
     background-color: #c0392b;
-}
-
-/* Mensajes Flash (Alertas) */
-.flash-messages {
-    background-color: #d4edda;
-    color: #155724;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    border: 1px solid #c3e6cb;
-    text-align: center;
 }
