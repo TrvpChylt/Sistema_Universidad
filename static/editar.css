@@ -64,3 +64,15 @@
 .btn-guardar:hover {
     background-color: #bf360c;
 }
+.btn-cancelar {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    color: #666;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.btn-cancelar:hover {
+    text-decoration: underline;
+}
