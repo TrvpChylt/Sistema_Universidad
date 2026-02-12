@@ -201,7 +201,7 @@ def editar_alumno(alumno_id):
         conn.commit()
         conn.close()
         flash("Datos actualizados correctamente.")
-        return redirect(url_for('perfil', usuario_id=alumno_id))
+        return redirect(url_for('gestion_alumnos', usuario_id=alumno_id))
 
     alumno = conn.execute('SELECT * FROM alumnos WHERE id = ?', (alumno_id,)).fetchone()
     conn.close()
