@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='editar.css') }}">
+    <title>Editor</title>
+</head>
+<body>
+    <div class="edit-container">
+        <h2>Editar Perfil</h2>
+        <form method="POST" class="form-group">
+            <label>Nombre:</label>
+            <input type="text" name="nombre" value="{{ alumno.nombre }}">
+            
+            <label>Apellido:</label>
+            <input type="text" name="apellido" value="{{ alumno.apellido }}">
+            
+            <label>Correo:</label>
+            <input type="email" name="correo" value="{{ alumno.correo }}">
+            
+            <button type="submit" class="btn-guardar">Guardar Cambios</button>
+        </form>
+    </div>
+</body>
+</html>

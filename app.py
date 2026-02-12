@@ -179,6 +179,36 @@ def perfil(usuario_id):
     return render_template('perfil.html', usuario=usuario, materias=materias)
 
 
+@app.route('/editar_alumno/<int:alumno_id>', methods=['GET', 'POST'])
+def editar_alumno(alumno_id):
+    if session.get('rol') != 'admin':
+        flash("No tienes permiso para realizar esta acción.")
+        return redirect(url_for('index'))
+
+    conn = get_db_connection()
+
+    if request.method == 'POST':
+        nombre = request.form['nombre']
+        apellido = request.form['apellido']
+        correo = request.form['correo']
+    
+        query_update = """
+            UPDATE alumnos 
+            SET nombre = ?, apellido = ?, correo = ?
+            WHERE id = ?
+        """
+        conn.execute(query_update, (nombre, apellido, correo, alumno_id))
+        conn.commit()
+        conn.close()
+        flash("Datos actualizados correctamente.")
+        return redirect(url_for('perfil', usuario_id=alumno_id))
+
+    alumno = conn.execute('SELECT * FROM alumnos WHERE id = ?', (alumno_id,)).fetchone()
+    conn.close()
+    
+    return render_template('editar_alumno.html', alumno=alumno)
+
+
 @app.route('/editar/<int:usuario_id>', methods=['POST'])
 def editar_estudiante(usuario_id):
     nombre = request.form['nombre']

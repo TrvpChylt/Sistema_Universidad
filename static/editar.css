@@ -1,0 +1,66 @@
+/* Contenedor principal para centrar el formulario */
+.edit-container {
+    max-width: 500px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Encabezado similar al color de tu tabla */
+.edit-container h2 {
+    background-color: #e64a19; /* El naranja rojizo de tu imagen */
+    color: white;
+    margin: -20px -20px 20px -20px;
+    padding: 15px;
+    border-radius: 8px 8px 0 0;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+/* Estilo de los grupos de entrada */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Evita que el input se salga del contenedor */
+    font-size: 1rem;
+}
+
+.form-group input:focus {
+    border-color: #e64a19;
+    outline: none;
+    box-shadow: 0 0 5px rgba(230, 74, 25, 0.3);
+}
+
+/* Botón de Guardar */
+.btn-guardar {
+    width: 100%;
+    background-color: #e64a19;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.btn-guardar:hover {
+    background-color: #bf360c;
+}
