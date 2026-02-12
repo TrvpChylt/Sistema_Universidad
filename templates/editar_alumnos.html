@@ -8,19 +8,26 @@
 </head>
 <body>
     <div class="edit-container">
-        <h2>Editar Perfil</h2>
-        <form method="POST" class="form-group">
-            <label>Nombre:</label>
-            <input type="text" name="nombre" value="{{ alumno.nombre }}">
-            
-            <label>Apellido:</label>
-            <input type="text" name="apellido" value="{{ alumno.apellido }}">
-            
-            <label>Correo:</label>
-            <input type="email" name="correo" value="{{ alumno.correo }}">
-            
+        <h2>Modificar Datos de Alumno</h2>
+        <form method="POST">
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" value="{{ alumno.nombre }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="apellido">Apellido</label>
+                <input type="text" id="apellido" name="apellido" value="{{ alumno.apellido }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="correo">Correo Electrónico</label>
+                <input type="email" id="correo" name="correo" value="{{ alumno.correo }}" required>
+            </div>
+
             <button type="submit" class="btn-guardar">Guardar Cambios</button>
+            <a href="{{ url_for('index') }}" class="btn-cancelar">Cancelar y volver</a>
         </form>
-    </div>
+    </div>  
 </body>
 </html>
