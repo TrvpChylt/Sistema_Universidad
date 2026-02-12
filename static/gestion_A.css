@@ -47,10 +47,6 @@ th, td {
     border-bottom: 1px solid #ddd;
 }
 
-tr:hover {
-    background-color: #f1f1f1;
-}
-
 /* Botones y Acciones */
 .btn-ver {
     background-color: #3498db;
