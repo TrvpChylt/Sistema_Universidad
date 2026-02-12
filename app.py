@@ -206,7 +206,7 @@ def editar_alumno(alumno_id):
     alumno = conn.execute('SELECT * FROM alumnos WHERE id = ?', (alumno_id,)).fetchone()
     conn.close()
     
-    return render_template('editar_alumno.html', alumno=alumno)
+    return render_template('editar_alumnos.html', alumno=alumno)
 
 
 @app.route('/editar/<int:usuario_id>', methods=['POST'])
