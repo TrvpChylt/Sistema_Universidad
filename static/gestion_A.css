@@ -72,3 +72,16 @@ button {
 button:hover {
     background-color: #c0392b;
 }
+
+.btn-cancelar {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    color: #666;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.btn-cancelar:hover {
+    text-decoration: underline;
+}
