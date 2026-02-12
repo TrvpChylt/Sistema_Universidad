@@ -15,8 +15,9 @@ h1 {
 
 /* Enlaces de navegación */
 a {
+    background-color: #F54927;
     text-decoration: none;
-    color: #3498db;
+    color: #fff;
     font-weight: bold;
     transition: color 0.3s;
 }
@@ -38,7 +39,7 @@ table {
 
 thead {
     background-color: #F54927;
-    color: #000;
+    color: #fff;
 }
 
 th, td {
