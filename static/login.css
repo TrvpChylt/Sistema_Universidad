@@ -60,3 +60,5 @@ button:active {
     transform: translateY(0); 
 }
 
+.flash-success { color: rgb(0, 180, 0); }
+.flash-error { color: rgb(250, 0, 0); }

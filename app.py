@@ -128,9 +128,12 @@ def login():
         session['usuario_id'] = usuario['id']
         session['nombre'] = usuario['nombre']
         session['rol'] = rol
+
+        
+        flash("¡Inicio de sesión exitoso!", "success") 
         return redirect(url_for('index'))
     
-    flash("Correo o contraseña incorrectos")
+    flash("Correo o contraseña incorrectos", "error")
     return redirect(url_for('login_page'))
 
 
